@@ -30,8 +30,8 @@ export default function QuizSetup({ onQuizReady }) {
       <h2>Configure Your Quiz</h2>
       <form onSubmit={handleStartQuiz}>
 
-        <label>HSK Level:</label>
-        <select value={hskLevel} onChange={(e) => setHskLevel(e.target.value)}>
+        <label htmlFor="hsk-select">HSK Level:</label>
+        <select id="hsk-select" value={hskLevel} onChange={(e) => setHskLevel(e.target.value)}>
           <option value="all">All Characters</option>
           <option value="1">HSK 1</option>
           <option value="2">HSK 2</option>
@@ -41,15 +41,16 @@ export default function QuizSetup({ onQuizReady }) {
           <option value="6">HSK 6</option>
         </select>
 
-        <label>Difficulty (Distractor Proximity):</label>
-        <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+        <label htmlFor="diff-select">Difficulty (Distractor Proximity):</label>
+        <select id="diff-select" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
           <option value="easy">Easy (Distant Topology)</option>
           <option value="medium">Medium (Similar Topology)</option>
           <option value="hard">Hard (Near-Identical Topology)</option>
         </select>
 
-        <label>Number of Questions:</label>
+        <label htmlFor="count-input">Number of Questions:</label>
         <input
+          id="count-input"
           type="number"
           min="1" max="20"
           value={count}
