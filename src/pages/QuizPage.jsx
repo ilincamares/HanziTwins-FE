@@ -11,7 +11,8 @@ export default function QuizPage() {
         <QuizSetup onQuizReady={(data) => setQuizData(data)} />
       ) : (
         <QuizActive
-          questions={quizData}
+          questions={quizData.questions}
+          metadata={quizData.metadata}
           onRestart={() => setQuizData(null)}
         />
       )}

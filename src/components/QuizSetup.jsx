@@ -16,7 +16,7 @@ export default function QuizSetup({ onQuizReady }) {
         params: { hsk_level: hskLevel, difficulty, count }
       });
 
-      onQuizReady(response.data.questions);
+      onQuizReady(response.data);
     } catch (error) {
       console.error("Error fetching quiz:", error);
       alert("Failed to load quiz. Is the backend running?");
