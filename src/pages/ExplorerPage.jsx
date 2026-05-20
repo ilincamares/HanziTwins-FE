@@ -20,6 +20,7 @@ export default function ExplorerPage() {
   const plotDivRef = useRef(null);
   const pointsRef = useRef([]);
   const clickHandlerRef = useRef(null);
+  const [projectionMethod, setProjectionMethod] = useState("umap");
 
   useEffect(() => {
     pointsRef.current = points;
@@ -33,7 +34,7 @@ export default function ExplorerPage() {
         setSelectedPoint(null);
         setNeighbors([]);
 
-        const data = await getEmbeddingMap(hskLevel);
+        const data = await getEmbeddingMap(hskLevel, projectionMethod);
         setPoints(data.points || []);
       } catch (error) {
         console.error(error);
@@ -44,7 +45,7 @@ export default function ExplorerPage() {
     }
 
     loadMap();
-  }, [hskLevel]);
+  }, [hskLevel, projectionMethod]);
 
   async function handlePointSelected(point) {
     setSelectedPoint(point);
@@ -165,8 +166,7 @@ export default function ExplorerPage() {
       <section className="progress-header">
         <h1>Character Similarity Map</h1>
         <p>
-          Explore the two-dimensional projection of the embedding space learned
-          by the Siamese neural network.
+          Explore the two-dimensional {projectionMethod.toUpperCase()} projection of the embedding space learned by the Siamese neural network.
         </p>
 
         <div className="explorer-controls">
@@ -184,6 +184,17 @@ export default function ExplorerPage() {
             <option value="4">HSK 4</option>
             <option value="5">HSK 5</option>
             <option value="6">HSK 6</option>
+          </select>
+
+          <label htmlFor="projection-method">Projection:</label>
+
+          <select
+            id="projection-method"
+            value={projectionMethod}
+            onChange={(event) => setProjectionMethod(event.target.value)}
+          >
+            <option value="umap">UMAP</option>
+            <option value="tsne">t-SNE</option>
           </select>
         </div>
       </section>
